@@ -1,5 +1,5 @@
 
-public class Day1Part1 {
+public class Day1 {
 
     public static void main(String[] args) {
         String input = "1865\n" +
@@ -203,10 +203,18 @@ public class Day1Part1 {
                 "1715\n" +
                 "1602";
 
+
+        System.out.println("part 1:");
+        part1(input);
+        System.out.println("part 2:");
+        part2(input);
+
+
+    }
+
+    private static void part1(String input) {
         String[] list = input.split("\\s");
-
         for (int y = 0; y < list.length; y++) {
-
             for (int i = 0; i < list.length; i++) {
                 if (y == i) {
                     continue;
@@ -214,18 +222,29 @@ public class Day1Part1 {
                 if (Integer.parseInt(list[y]) + Integer.parseInt(list[i]) == 2020) {
                     System.out.println("Answer found");
                     System.out.println("Answer = " + Integer.parseInt(list[y]) * Integer.parseInt(list[i]));
-                    System.exit(1);
+                    return;
                 }
 
             }
         }
-
-
-
-
-
-
-
-
     }
+
+    private static void part2(String input) {
+        String[] list = input.split("\\s");
+        for (int y = 0; y < list.length; y++) {
+            for (int i = 0; i < list.length; i++) {
+                for (int j = 0; j < list.length; j++) {
+
+                    if (Integer.parseInt(list[y]) + Integer.parseInt(list[i]) + Integer.parseInt(list[j]) == 2020) {
+                        System.out.println("Answer found");
+                        System.out.println("Answer = " + Integer.parseInt(list[y]) * Integer.parseInt(list[i]) * Integer.parseInt(list[j]));
+                        return;
+                    }
+
+                }
+            }
+        }
+    }
+
+
 }
