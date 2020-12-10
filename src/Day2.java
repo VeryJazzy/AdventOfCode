@@ -1032,7 +1032,6 @@ public class Day2 {
         int lowest = Integer.parseInt(numberSplit[0]);
         int highest = Integer.parseInt(numberSplit[1]);
         int occurrences = password.length() - password.replaceAll(letter,"").length();
-
         if (occurrences >= lowest && occurrences <= highest) {
             return true;
         }
