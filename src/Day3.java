@@ -331,7 +331,7 @@ public class Day3 {
                 "###..###..#...#................";
         String[] skiMap = input.split("\\r?\\n");
 
-        skier skier = new skier(skiMap);
+        Day3Skier skier = new Day3Skier(skiMap);
 
         long part1Trees = skier.checkRoute(3,1);
         long part2TreesMultiplied = skier.checkRoute(1, 1) *

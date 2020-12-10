@@ -1,10 +1,10 @@
-public class skier {
+public class Day3Skier {
 
     private String[] skiMap;
     private int currentDown;
     private int currentAcross;
 
-    public skier(String[] skiMap) {
+    public Day3Skier(String[] skiMap) {
         this.skiMap = skiMap;
         this.currentDown = 0;
         this.currentAcross = 0;
