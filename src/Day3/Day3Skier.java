@@ -1,3 +1,5 @@
+package Day3;
+
 public class Day3Skier {
 
     private String[] skiMap;
@@ -31,9 +33,7 @@ public class Day3Skier {
     }
 
     public void generateMap() {
-        if (currentAcross >= skiMap[0].length()) {
-            currentAcross -= skiMap[0].length();
-        }
+            currentAcross = currentAcross % skiMap[0].length();
     }
 
     public void resetSkier() {
