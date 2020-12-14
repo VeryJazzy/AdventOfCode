@@ -1026,19 +1026,19 @@ public class OperationImmigrate {
                 "eyr:2021\n" +
                 "hcl:#602927 iyr:2014\n" +
                 "pid:274974402 hgt:183cm";
-//        String input = "ecl:#eef340 eyr:2023 hcl:#c0946f pid:244684338 iyr:2020 cid:57 byr:1969 hgt:152cm\n" +
+//        String input = "pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980\n" +
+//                "hcl:#623a2f \n" +
 //                "\n" +
-//                "pid:303807545 cid:213 ecl:gry hcl:#fffffd\n" +
-//                "eyr:2038 byr:1951\n" +
-//                "hgt:171cm iyr:2011\n" +
+//                "eyr:2029 ecl:blu cid:129 byr:1989\n" +
+//                "iyr:2014 pid:896056539 hcl:#a97842 hgt:165cm\n" +
 //                "\n" +
-//                "hcl:#c0946f byr:1933 eyr:2025 pid:517067213 hgt:173cm\n" +
-//                "ecl:hzl\n" +
-//                "iyr:2018\n" +
-//                "\n" +
-//                "pid:5253256652 byr:2009 hgt:152cm iyr:1989 eyr:1968 hcl:64cb63 ecl:hzl";
+//                "hgt:59cm ecl:zzz\n" +
+//                "eyr:2038 hcl:74454a iyr:2023\n" +
+//                "pid:3556412378 byr:2007";
         OperationImmigrate operationImmigrate = new OperationImmigrate();
         operationImmigrate.airport(input);
+
+
     }
 
     public void airport(String input) {
@@ -1048,8 +1048,9 @@ public class OperationImmigrate {
 
         for (String pp : passportBatch) {
             Passport passport = new Passport(pp);
+            if (airportScanner.requiredFields(passport) ) {
+                //airportScanner.checkFields(passport)
 
-            if (airportScanner.validatePassport(passport)) {
                 validPassports++;
             }
         }
