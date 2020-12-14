@@ -1026,15 +1026,6 @@ public class OperationImmigrate {
                 "eyr:2021\n" +
                 "hcl:#602927 iyr:2014\n" +
                 "pid:274974402 hgt:183cm";
-//        String input = "pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980\n" +
-//                "hcl:#623a2f \n" +
-//                "\n" +
-//                "eyr:2029 ecl:blu cid:129 byr:1989\n" +
-//                "iyr:2014 pid:896056539 hcl:#a97842 hgt:165cm\n" +
-//                "\n" +
-//                "hgt:59cm ecl:zzz\n" +
-//                "eyr:2038 hcl:74454a iyr:2023\n" +
-//                "pid:3556412378 byr:2007";
         OperationImmigrate operationImmigrate = new OperationImmigrate();
         operationImmigrate.airport(input);
 
@@ -1048,9 +1039,7 @@ public class OperationImmigrate {
 
         for (String pp : passportBatch) {
             Passport passport = new Passport(pp);
-            if (airportScanner.requiredFields(passport) ) {
-                //airportScanner.checkFields(passport)
-
+            if (airportScanner.requiredFields(passport) && airportScanner.checkFields(passport)) {
                 validPassports++;
             }
         }

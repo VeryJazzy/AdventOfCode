@@ -44,11 +44,8 @@ public class Passport {
                 case "hgt":
                     this.hgt = info;
                     break;
-
             }
-
         }
-
     }
 
 
