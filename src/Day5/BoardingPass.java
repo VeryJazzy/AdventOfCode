@@ -37,8 +37,14 @@ public class BoardingPass {
     }
 
 
-
-
+    @Override
+    public String toString() {
+        return "BoardingPass{" +
+                "row=" + row +
+                ", column=" + column +
+                ", id=" + id +
+                '}';
+    }
 
     public int getId() {
         return id;

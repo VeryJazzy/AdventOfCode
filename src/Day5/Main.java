@@ -4,6 +4,7 @@ import Utility.FileUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,34 +15,41 @@ public class Main {
     public void seatScanner() {
         String puzzleInput = FileUtil.readFile("C:\\Users\\VeryJazzy\\Desktop\\adventCode1\\Resources\\day5.txt");
         String[] boardingPasses = puzzleInput.split("\n");
-        ArrayList<Integer> seatIDs = new ArrayList<Integer>();
+        ArrayList<BoardingPass> bpList = new ArrayList<BoardingPass>();
 
         int largestSeatID = 0;
         for (String seat : boardingPasses) {
             BoardingPass bp = new BoardingPass(seat);
-            seatIDs.add(bp.getId());
+            bpList.add(bp);
             if (bp.getId() > largestSeatID) {
                 largestSeatID = bp.getId();
             }
         }
         System.out.println("Largest seat ID: " + largestSeatID);
 
-        int mySeatID = findMySeat(seatIDs);
+        int mySeatID = findMySeat(bpList);
         System.out.println("My seat ID: " + mySeatID);
     }
 
 
-    public int findMySeat(ArrayList<Integer> seatIDs) {
-        Collections.sort(seatIDs);
+    public int findMySeat(ArrayList<BoardingPass> bpList) {
+        Collections.sort(bpList, new BoardingPassComparator());
 
-        for (int i = 0; i < seatIDs.size(); i++) {
-            System.out.println(seatIDs.get(i));
+        int IDCounter = bpList.get(0).getId();
+        for (int i = 0; i < bpList.size(); i++) {
+            if (bpList.get(i).getId() != IDCounter) {
+                return IDCounter;
+            }
+            IDCounter++;
         }
-
-
-        return 0;
+        throw new RuntimeException("oh no");
     }
 
-
+    static class BoardingPassComparator implements Comparator<BoardingPass> {
+        @Override
+        public int compare(BoardingPass o1, BoardingPass o2) {
+            return Comparator.comparing(BoardingPass::getId).compare(o1, o2);
+        }
+    }
 }
 
