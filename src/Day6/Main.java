@@ -47,11 +47,6 @@ public class Main {
         return uniqueChars.size();
     }
 
-
-
-
-
-
     public void QuestionsEveryoneAnsweredYes(ArrayList<Group> groups) {
         int sumOfYeses = 0;
 
@@ -64,19 +59,19 @@ public class Main {
 
     public int countRecurringChars(Group group) {
         ArrayList<Character> firstPersonsAnswers = group.getPeople().get(0).getAnswers();
-        HashSet<Character> recurringAnswers = new HashSet<Character>(firstPersonsAnswers);
+        HashSet<Character> possibleRecurringAnswers = new HashSet<Character>(firstPersonsAnswers);
 
         for (Person person : group.getPeople()) {
-            ArrayList<Character> toRemove = new ArrayList<Character>();
 
-            for (char answer : recurringAnswers) {
+            Iterator<Character> iterator = possibleRecurringAnswers.iterator();
+            while (iterator.hasNext()) {
+                char answer = iterator.next();
                 if (!person.getAnswers().contains(answer)) {
-                    toRemove.add(answer);
+                    iterator.remove();
                 }
             }
-            recurringAnswers.removeAll(toRemove);
         }
-        return recurringAnswers.size();
+        return possibleRecurringAnswers.size();
     }
 
 
