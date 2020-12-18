@@ -1,4 +1,4 @@
-package Day6Input;
+package Day6;
 
 import Utility.FileUtil;
 
