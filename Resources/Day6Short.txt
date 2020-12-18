@@ -1,6 +1,6 @@
-aaabccde
-efa
-aae
+abc
+ab
+accd
 
 abc
 ab

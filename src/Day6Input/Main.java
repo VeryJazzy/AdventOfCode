@@ -12,28 +12,37 @@ public class Main {
 
     public void customsForms() {
         String puzzleInput = FileUtil.readFile("C:\\Users\\VeryJazzy\\Desktop\\adventCode1\\Resources\\Day6Input.txt");
-        String[] groups = puzzleInput.split("\r\n\r\n");
+        ArrayList<Group> groups = populateGroups(puzzleInput);
 
-        part1(groups);
-
-        part2(groups);
+        QuestionsAnyoneAnsweredYes(groups);
+        QuestionsEveryoneAnsweredYes(groups);
     }
 
-    public void part1(String[] groups) {
+
+    private ArrayList<Group> populateGroups(String puzzleInput) {
+        ArrayList<Group> groups = new ArrayList<Group>();
+
+        for (String g : puzzleInput.split("\r\n\r\n")) {
+            Group group = new Group(g);
+            groups.add(group);
+        }
+        return groups;
+    }
+
+    public void QuestionsAnyoneAnsweredYes(ArrayList<Group> groups) {
+
         int sumOfYeses = 0;
-        for (String group : groups) {
-            sumOfYeses += countYeses(group);
+        for (Group group : groups) {
+            sumOfYeses += countUniqueChars(group);
         }
         System.out.println(sumOfYeses);
-
     }
 
-    public int countYeses(String group) {
+    public int countUniqueChars(Group group) {
         Set<Character> uniqueChars = new HashSet<Character>();
-        for (char c : group.toCharArray()) {
-            if (c != '\r' && c != '\n') {
-                uniqueChars.add(c);
-            }
+
+        for (Person p : group.getPeople()) {
+               uniqueChars.addAll(p.getAnswers());
         }
         return uniqueChars.size();
     }
@@ -43,63 +52,36 @@ public class Main {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public void part2(String[] groups) {
+    public void QuestionsEveryoneAnsweredYes(ArrayList<Group> groups) {
         int sumOfYeses = 0;
 
-        for (String group : groups) {
-            sumOfYeses += countIfEveryoneSaysYesToAQuestion(group);
+        for (Group group : groups) {
+            sumOfYeses += countRecurringChars(group);
         }
         System.out.println(sumOfYeses);
     }
 
 
-    public int countIfEveryoneSaysYesToAQuestion(String group) {
-        String[] people = group.split("\r\n");
-        HashSet<Character> charsToCompare = new HashSet<>(stringToCharArrList(people[0]));
+    public int countRecurringChars(Group group) {
+        ArrayList<Character> firstPersonsAnswers = group.getPeople().get(0).getAnswers();
+        HashSet<Character> recurringAnswers = new HashSet<Character>(firstPersonsAnswers);
 
-        for (String person : people) {
-             ArrayList<Character> personArrList = stringToCharArrList(person);
-             ArrayList<Character> toRemove = new ArrayList<Character>();
-             for (char c : charsToCompare) {
-                 if (!personArrList.contains(c)) {
-                     toRemove.add(c);
-                 }
-             }
-             charsToCompare.removeAll(toRemove);
+        for (Person person : group.getPeople()) {
+            ArrayList<Character> toRemove = new ArrayList<Character>();
+
+            for (char answer : recurringAnswers) {
+                if (!person.getAnswers().contains(answer)) {
+                    toRemove.add(answer);
+                }
+            }
+            recurringAnswers.removeAll(toRemove);
         }
-
-        return charsToCompare.size();
+        return recurringAnswers.size();
     }
 
-    public ArrayList<Character> stringToCharArrList(String s) {
-        ArrayList<Character> arrList = new ArrayList<Character>();
-        for (char c : s.toCharArray()) {
-            arrList.add(c);
-        }
-        return arrList;
-    }
+
+
+
 
 
 
