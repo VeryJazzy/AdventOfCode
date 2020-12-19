@@ -1,0 +1,2 @@
+green g bags contain 1 blue b bag, 1 pink p bag.
+pink p bags contain 1 shiny gold bag.

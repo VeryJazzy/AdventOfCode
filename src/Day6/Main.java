@@ -20,7 +20,7 @@ public class Main {
 
 
     private ArrayList<Group> populateGroups(String puzzleInput) {
-        ArrayList<Group> groups = new ArrayList<Group>();
+        ArrayList<Group> groups = new ArrayList<>();
 
         for (String g : puzzleInput.split("\r\n\r\n")) {
             Group group = new Group(g);
