@@ -66,7 +66,6 @@ public class Main {
     }
 
     public Bag turnRuleIntoBag(String rule) {
-
         String[] splitRule = rule.split("\\d\\s");
         String[] bagName = splitRule[0].split("\\s");
         Bag bag = new Bag(bagName[0] + " " + bagName[1]);
