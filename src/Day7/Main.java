@@ -3,6 +3,7 @@ package Day7;
 import Utility.FileUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
@@ -11,18 +12,18 @@ public class Main {
 
     public static void main(String[] args) {
         Main main = new Main();
-        String bagRules = FileUtil.readFile("C:\\Users\\VeryJazzy\\Desktop\\adventCode1\\Resources\\Day7Short.txt");
+        String bagRules = FileUtil.readFile("C:\\Users\\VeryJazzy\\Desktop\\adventCode1\\Resources\\Day7Input.txt");
         main.start(bagRules);
     }
 
     public void start(String bagRules) {
         this.bagList = createBags(bagRules);
+        Bag shinyGold = findShinyGold();
+        System.out.println(countInnerBags(shinyGold));
 
-//        //find shiny gold
-//        countInnerBags(rule1); // give shiny gold
 
+//part1
 //        int bagsThatCanContainGoldShinies = 0;
-//
 //        for (Bag bag : bagList) {
 //            if (checkContents(bag)) {
 //                bagsThatCanContainGoldShinies++;
@@ -30,7 +31,6 @@ public class Main {
 //        }
 //        System.out.println(bagsThatCanContainGoldShinies);
     }
-
 
     public boolean checkContents(Bag bag) {
         if (bag.contains("shiny gold")) {
@@ -75,28 +75,54 @@ public class Main {
         String[] ruleParts = rule.split("\\s");
         Bag bag = new Bag(ruleParts[0] + " " + ruleParts[1]);
 
-        for (int i = 4; i < ruleParts.length; i+=4) {
+        for (int i = 4; i < ruleParts.length; i += 4) {
             if (ruleParts[i].equals("no")) {
                 break;
             }
-            bag.addContents(ruleParts[i+1] + " " + ruleParts[i+2], Integer.parseInt(ruleParts[i]));
+            bag.addContents(ruleParts[i + 1] + " " + ruleParts[i + 2], Integer.parseInt(ruleParts[i]));
         }
         return bag;
     }
 
-    public int countInnerBags(String shinyGoldRule) {
-        Bag shinyGoldBag = turnRuleIntoBag(shinyGoldRule);
-
-        if (shinyGoldBag.getContents().isEmpty()) {
+    public int countInnerBags(Bag bag) {
+        if (bag.getContents().isEmpty()) {
             return 0;
         }
-        int count = 0;
-        for (Map.Entry entry : shinyGoldBag.getContents().entrySet()) {
-            count += (int) entry.getValue();
-            Bag containedBag = getBagFromBagList((String)entry.getKey());
-//            countInnerBags(containedBag);
+        int currentNumber = 0;
+
+        //now we are in the bags contents
+        for (Map.Entry<String,Integer> entry : bag.getContents().entrySet()) {
+            String currentBagName = entry.getKey();
+            int amountOfCurrentBags = entry.getValue();
+
+            Bag containedBag = getBagFromBagList(currentBagName);
+            if (countInnerBags(containedBag) == 0) {
+                currentNumber += amountOfCurrentBags;
+            } else {
+                amountOfCurrentBags *= countInnerBags(containedBag);
+            }
+
         }
-        return count;
+
+
+
+
+        throw new RuntimeException("countInnerBags problem");
+    }
+
+
+
+
+
+
+
+    public Bag findShinyGold() {
+        for (Bag bag : bagList) {
+            if (bag.getName().equals("shiny gold")) {
+                return bag;
+            }
+        }
+        throw new RuntimeException("shiny gold not found in list");
     }
 
 }

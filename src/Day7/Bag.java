@@ -24,6 +24,14 @@ public class Bag {
     }
 
     @Override
+    public String toString() {
+        return "Bag{" +
+                "name='" + name + '\'' +
+                ", contents=" + contents +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object otherBag) {
         if (this == otherBag) {
             return true;
