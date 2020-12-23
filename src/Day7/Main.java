@@ -3,6 +3,7 @@ package Day7;
 import Utility.FileUtil;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Main {
 
@@ -10,20 +11,24 @@ public class Main {
 
     public static void main(String[] args) {
         Main main = new Main();
-        main.collectShinies();
+        String bagRules = FileUtil.readFile("C:\\Users\\VeryJazzy\\Desktop\\adventCode1\\Resources\\Day7Short.txt");
+        main.start(bagRules);
     }
 
-    public void collectShinies() {
-        String bagRules = FileUtil.readFile("C:\\Users\\VeryJazzy\\Desktop\\adventCode1\\Resources\\Day7Input.txt");
+    public void start(String bagRules) {
         this.bagList = createBags(bagRules);
-        int bagsThatCanContainGoldShinies = 0;
 
-        for (Bag bag : bagList) {
-            if (checkContents(bag)) {
-                bagsThatCanContainGoldShinies++;
-            }
-        }
-        System.out.println(bagsThatCanContainGoldShinies);
+//        //find shiny gold
+//        countInnerBags(rule1); // give shiny gold
+
+//        int bagsThatCanContainGoldShinies = 0;
+//
+//        for (Bag bag : bagList) {
+//            if (checkContents(bag)) {
+//                bagsThatCanContainGoldShinies++;
+//            }
+//        }
+//        System.out.println(bagsThatCanContainGoldShinies);
     }
 
 
@@ -32,7 +37,7 @@ public class Main {
             return true;
         }
 
-        for (String containedBagName : bag.getContents()) {
+        for (String containedBagName : bag.getContents().keySet()) {
             Bag aBag = getBagFromBagList(containedBagName);
 
             if (checkContents(aBag)) {
@@ -62,18 +67,34 @@ public class Main {
             Bag bag = turnRuleIntoBag(rule);
             bagList.add(bag);
         }
+
         return bagList;
     }
 
     public Bag turnRuleIntoBag(String rule) {
-        String[] splitRule = rule.split("\\d\\s");
-        String[] bagName = splitRule[0].split("\\s");
-        Bag bag = new Bag(bagName[0] + " " + bagName[1]);
-        for (int i = 1; i < splitRule.length; i++) {
-            String[] containedBagName = splitRule[i].split("\\s");
-            bag.addContents(containedBagName[0] + " " + containedBagName[1]);
+        String[] ruleParts = rule.split("\\s");
+        Bag bag = new Bag(ruleParts[0] + " " + ruleParts[1]);
+
+        for (int i = 4; i < ruleParts.length; i+=4) {
+            if (ruleParts[i].equals("no")) {
+                break;
+            }
+            bag.addContents(ruleParts[i+1] + " " + ruleParts[i+2], Integer.parseInt(ruleParts[i]));
         }
         return bag;
+    }
+
+    public int countInnerBags(String rule) {
+        Bag bag = turnRuleIntoBag(rule);
+
+        if (bag.getContents().isEmpty()) {
+            return 0;
+        }
+        int count = 0;
+        for (Map.Entry entry : bag.getContents().entrySet()) {
+            count += (int) entry.getValue();
+        }
+        return count;
     }
 
 }

@@ -3,7 +3,6 @@ package Day7;
 public class SomeClass {
 
     public int countInnerBags(String rule) {
-        //now with our new tests we will need to start turning the rules into bag objects
 
         String[] splitRule = rule.split("\\s");
         if (splitRule[4].equals("no")) {

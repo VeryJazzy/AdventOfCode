@@ -1,23 +1,23 @@
 package Day7;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Bag {
     private String name;
-    private ArrayList<String> contents = new ArrayList<>();
+    private HashMap<String, Integer> contents = new HashMap<>();
 
     public Bag(String name) {
         this.name = name;
     }
 
-    public void addContents(String bagName) {
-        if (!contents.contains(bagName)) {
-            contents.add(bagName);
+    public void addContents(String bagName, int amount) {
+        if (!contents.containsKey(bagName)) {
+            contents.put(bagName, amount);
         }
     }
 
     public boolean contains(String bagName) {
-        if (contents.contains(bagName)) {
+        if (contents.containsKey(bagName)) {
             return true;
         }
         return false;
@@ -41,7 +41,7 @@ public class Bag {
         return name;
     }
 
-    public ArrayList<String> getContents() {
+    public HashMap<String, Integer> getContents() {
         return contents;
     }
 

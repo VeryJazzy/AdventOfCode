@@ -1,2 +1,4 @@
-green g bags contain 1 blue b bag, 1 pink p bag.
-pink p bags contain 1 shiny gold bag.
+shiny gold bags contain no other bags.
+mirrored beige bags contain 4 pale gold bags, 1 pale aqua bag.
+pale maroon bags contain 2 dotted orange bags.
+dim tan bags contain no other bags.

@@ -1,7 +1,3 @@
-abc
-ab
-accd
-
-abc
-ab
-cc
+mirrored beige bags contain 4 pale gold bags, 1 pale aqua bag.
+pale maroon bags contain 2 dotted orange bags.
+dim tan bags contain no other bags.
