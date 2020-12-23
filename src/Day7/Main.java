@@ -84,15 +84,17 @@ public class Main {
         return bag;
     }
 
-    public int countInnerBags(String rule) {
-        Bag bag = turnRuleIntoBag(rule);
+    public int countInnerBags(String shinyGoldRule) {
+        Bag shinyGoldBag = turnRuleIntoBag(shinyGoldRule);
 
-        if (bag.getContents().isEmpty()) {
+        if (shinyGoldBag.getContents().isEmpty()) {
             return 0;
         }
         int count = 0;
-        for (Map.Entry entry : bag.getContents().entrySet()) {
+        for (Map.Entry entry : shinyGoldBag.getContents().entrySet()) {
             count += (int) entry.getValue();
+            Bag containedBag = getBagFromBagList((String)entry.getKey());
+//            countInnerBags(containedBag);
         }
         return count;
     }
