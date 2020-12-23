@@ -46,7 +46,7 @@ class SomeClassTest {
 
         Bag shinyGoldBag = main.turnRuleIntoBag(rule);
         int result = main.countInnerBags(shinyGoldBag);
-        assertEquals(7,result);
+        assertEquals(15,result);
     }
 
     @Test
@@ -55,12 +55,10 @@ class SomeClassTest {
         main.start("shiny gold bags contain 2 dark red bags.\r\n" +
                 "dark red bags contain 2 dark orange bags.\r\n" +
                 "dark orange bags contain 2 dark yellow bags.\r\n" +
-                "dark yellow bags contain 2 dark green bags.\r\n" +
-                "dark green bags contain 2 dark blue bags.\r\n" +
-                "dark blue bags contain 2 dark violet bags.\r\n" +
-                "dark violet bags contain no other bags.");
+                "dark yellow bags contain no other bags.");
+
         Bag shinyGoldBag = main.turnRuleIntoBag("shiny gold bags contain 2 dark red bags.");
-        assertEquals(126,main.countInnerBags(shinyGoldBag));
+        assertEquals(14,main.countInnerBags(shinyGoldBag));
     }
 
     @Test
@@ -79,6 +77,7 @@ class SomeClassTest {
         assertEquals(254,main.countInnerBags(shinyGoldBag));
     }
 
+
     @Test
     void finalTest3() {
         Main main = new Main();
@@ -88,6 +87,6 @@ class SomeClassTest {
                 dark blue bags contain no other bags.\r
                 green g bags contain no other bags.""");
         Bag shinyGoldBag = main.turnRuleIntoBag("shiny gold bags contain 2 dark blue bags, 4 dark black bags.");
-        assertEquals(30,main.countInnerBags(shinyGoldBag));
+        assertEquals(34,main.countInnerBags(shinyGoldBag));
     }
 }

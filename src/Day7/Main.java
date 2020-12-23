@@ -3,7 +3,6 @@ package Day7;
 import Utility.FileUtil;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
@@ -85,35 +84,28 @@ public class Main {
     }
 
     public int countInnerBags(Bag bag) {
-        if (bag.getContents().isEmpty()) {
-            return 0;
-        }
-        int currentNumber = 0;
+        int bagsInThisBag = 0;
 
-        //now we are in the bags contents
-        for (Map.Entry<String,Integer> entry : bag.getContents().entrySet()) {
+        //go into current backpack
+        for (Map.Entry<String, Integer> entry : bag.getContents().entrySet()) { //iterate through contained backpacks
             String currentBagName = entry.getKey();
             int amountOfCurrentBags = entry.getValue();
-
             Bag containedBag = getBagFromBagList(currentBagName);
-            if (countInnerBags(containedBag) == 0) {
-                currentNumber += amountOfCurrentBags;
+
+            if (containedBag.getContents().isEmpty()) {
+                bagsInThisBag += amountOfCurrentBags;
             } else {
-                amountOfCurrentBags *= countInnerBags(containedBag);
+                bagsInThisBag += amountOfCurrentBags;
+                bagsInThisBag += (amountOfCurrentBags * countInnerBags(containedBag));
             }
 
         }
 
+        return bagsInThisBag;
 
 
-
-        throw new RuntimeException("countInnerBags problem");
+//        throw new RuntimeException("countInnerBags problem");
     }
-
-
-
-
-
 
 
     public Bag findShinyGold() {
