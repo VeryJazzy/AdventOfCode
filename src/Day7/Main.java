@@ -21,7 +21,7 @@ public class Main {
         System.out.println(countInnerBags(shinyGold));
 
 
-//part1
+////part1
 //        int bagsThatCanContainGoldShinies = 0;
 //        for (Bag bag : bagList) {
 //            if (checkContents(bag)) {
