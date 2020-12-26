@@ -25,11 +25,11 @@ public class Counter {
                     counter += value;
                     break;
                 case "jmp":
-//                    if (indexesWeHaveBeenTo.contains(i += value)) {
-//                        break;
-//                    } else {
+                    if (indexesWeHaveBeenTo.contains(i + value)) {
+                        continue;
+                    } else {
                         i += value - 1;
-//                    }
+                    }
                     break;
             }
         }

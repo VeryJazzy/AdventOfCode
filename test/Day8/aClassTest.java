@@ -40,12 +40,12 @@ class aClassTest {
         assertEquals(24, counter.countAccumulator(rules));
     }
 
-    @Test
-    void backwardsJumpShouldEndProgram() {
-        String[] rules = {"acc +1", "acc +2", "acc +3", "jmp -3", "acc +10"};
-        Counter counter = new Counter();
-        assertEquals(6, counter.countAccumulator(rules));
-    }
+//    @Test
+//    void backwardsJumpShouldEndProgram() {
+//        String[] rules = {"acc +1", "acc +2", "acc +3", "jmp -3", "acc +10"};
+//        Counter counter = new Counter();
+//        assertEquals(6, counter.countAccumulator(rules));
+//    }
 
     @Test
     void changeJumpToNopToContinue() {
