@@ -8,6 +8,6 @@ public class Main {
         String[] instructions = switchBootCode.split("\r\n");
 
         Counter counter = new Counter();
-        System.out.println(counter.countAccumulator(instructions));
+        System.out.println(counter.findCorrectAccumulatorNumber(instructions));
     }
 }
