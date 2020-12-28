@@ -10,4 +10,5 @@ public class Main {
         Counter counter = new Counter();
         System.out.println(counter.findCorrectAccumulatorNumber(instructions));
     }
+
 }
