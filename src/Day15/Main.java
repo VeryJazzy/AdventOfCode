@@ -1,37 +1,43 @@
 package Day15;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
         Main main = new Main();
-        System.out.println(main.getNthNumber(2020,List.of(0,6,1,7,2,19,20)));
+        System.out.println(main.getNthNumber(30000000,List.of(0,14,6,20,1,4)));
     }
-
 
     public int getNthNumber(int n, List<Integer> turnsOG) {
-        ArrayList<Integer> turns = new ArrayList<>(turnsOG);
-        for (int i = turns.size(); i < n; i++) {
-            turns.add(nextNumber(turns));
+        HashMap<Integer,Integer> turnsMap = populateMap(n,turnsOG);
+        int currentLastNumber = turnsOG.get(turnsOG.size() - 1);
+
+        for (int i = turnsOG.size(); i < n; i++) {
+            int nextNumber = calculateNextNumber(turnsMap, currentLastNumber, i - 1);
+            turnsMap.put(currentLastNumber,i - 1);
+            currentLastNumber = nextNumber;
         }
-        return turns.get(turns.size() - 1);
+        return currentLastNumber;
     }
 
-    public int nextNumber(List<Integer> turns) {
-        int lastNumber = turns.get(turns.size() - 1);
-        return calculateNextNumber(turns, lastNumber);
+    public static HashMap<Integer, Integer> populateMap(int size, List<Integer> turnsOG) {
+        HashMap<Integer,Integer> turnsMap = new HashMap<>(size);
+        for (int i = 0; i < turnsOG.size() - 1; i++) {
+            turnsMap.put(turnsOG.get(i), i);
+        }
+        return turnsMap;
     }
 
 
-    public int calculateNextNumber(List<Integer> turns, int lastNumber) {
-        for (int i = turns.size() - 2; i > -1; i--) {
-            if (turns.get(i) == lastNumber) {
-                return (turns.size() - 1) - i;
-            }
+    public int calculateNextNumber(HashMap<Integer,Integer> turnsMap, int lastNumber, int currentPosition) {
+        Integer indexOfLastNumber = turnsMap.get(lastNumber);
+        if (indexOfLastNumber == null ) {
+            return 0;
         }
-        return 0;
+        return currentPosition - indexOfLastNumber;
     }
 
 
