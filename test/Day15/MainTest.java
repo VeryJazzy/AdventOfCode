@@ -41,6 +41,17 @@ class MainTest {
         Main main = new Main();
         assertEquals(436,main.getNthNumber(2020,List.of(0,3,6)));
         assertEquals(1836,main.getNthNumber(2020,List.of(3,1,2)));
-
     }
+///////////////////////////////////////////////////////////////////////////////////////
+    @Test
+    void part2Working() {
+        Main main = new Main();
+        assertEquals(175594,main.getNthNumber(1000000,List.of(0,3,6)));
+    }
+
+
+
+
+
+
 }
